@@ -1,4 +1,4 @@
-package vn.book.Enum;
+package vn.book.Util;
 
 public enum UserRole {
 	admin,

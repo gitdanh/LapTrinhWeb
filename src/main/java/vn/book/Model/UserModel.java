@@ -2,8 +2,6 @@ package vn.book.Model;
 
 import java.util.Date;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
@@ -12,7 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import vn.book.Enum.UserRole;
+import vn.book.Config.EnumValidator;
+import vn.book.Util.UserRole;
 
 @Data
 @NoArgsConstructor
@@ -42,8 +41,8 @@ public class UserModel {
 	@NotEmpty(message = "Mật khẩu không được để trống")
 	@Length(min = 5, max = 25, message = "Mật khẩu phải nhiều hơn 5 và ít hơn 20 kí tự")
 	private String password;
-	@Enumerated(EnumType.STRING)
-	private UserRole role;
+	@EnumValidator(enumClazz = UserRole.class)
+	private String role;
 	private boolean isDelete = false;
 	private Date createAt;
 	private Date updateAt;
