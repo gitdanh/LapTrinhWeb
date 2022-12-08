@@ -1,4 +1,4 @@
-package vn.book.Config;
+package vn.book.Config.Annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -11,7 +11,7 @@ import javax.validation.Payload;
 import javax.validation.ReportAsSingleViolation;
 import javax.validation.constraints.NotNull;
 
-import vn.book.Config.Impl.EnumValidatorImpl;
+import vn.book.Config.Annotation.Impl.EnumValidatorImpl;
 
 @Documented
 @Constraint(validatedBy = EnumValidatorImpl.class)
