@@ -1,4 +1,4 @@
-package vn.book.Config.Impl;
+package vn.book.Config.Annotation.Impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import vn.book.Config.EnumValidator;
+import vn.book.Config.Annotation.EnumValidator;
 
 public class EnumValidatorImpl implements ConstraintValidator<EnumValidator, String>{
 	List<String> valueList = null;

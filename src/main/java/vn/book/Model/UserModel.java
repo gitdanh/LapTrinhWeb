@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import vn.book.Config.EnumValidator;
+import vn.book.Config.Annotation.EnumValidator;
 import vn.book.Util.UserRole;
 
 @Data
