@@ -19,7 +19,7 @@ public class CategoryModel {
 	private Long categoryId;
 	@NotEmpty
 	@Length(min = 5, max = 50, message = "Tên danh mục phải lớn hơn 5 và bé hơn 50 kí tự")
-	private int categoryName;
+	private String categoryName;
 	
 	private String image;
 	private MultipartFile imageFile;

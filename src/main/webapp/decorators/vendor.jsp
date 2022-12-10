@@ -7,6 +7,8 @@
 <title>Shop</title>
 </head>
 <body>
-
+	<%@ include file="/common/vendor/sidebar.jsp" %>
+	
+	<sitemesh:write property='body'></sitemesh:write>
 </body>
 </html>

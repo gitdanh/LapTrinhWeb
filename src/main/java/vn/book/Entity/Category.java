@@ -27,7 +27,7 @@ public class Category {
 	@Column(name = "categoryId")
 	private Long categoryId;
 	@Column(name = "categoryName", columnDefinition = "nvarchar(50)")
-	private int categoryName;
+	private String categoryName;
 	@Column(name = "image", columnDefinition = "varchar(max)")
 	private String image;
 	@Column(name = "isDelete")

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import vn.book.Entity.Book;
 import vn.book.Repository.BookRepository;
@@ -25,6 +26,14 @@ public class BookServiceImpl implements IBookService {
 
 	@Override
 	public <S extends Book> S save(S entity) {
+		Optional<Book> opt = findById(entity.getBookId());
+		if(opt.isPresent()) {
+			if(StringUtils.isEmpty(entity.getImage())) {
+				entity.setImage(opt.get().getImage());
+			}else {
+				entity.setImage(entity.getImage());
+			}
+		}
 		return bookRepo.save(entity);
 	}
 
