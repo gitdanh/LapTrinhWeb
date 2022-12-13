@@ -1,6 +1,7 @@
 package vn.book.Service.Impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,6 +55,21 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public void deleteAll(Iterable<? extends User> entities) {
 		userRepo.deleteAll(entities);
+	}
+
+	@Override
+	public User findByUsername(String username) {
+		return userRepo.findByUsername(username);
+	}
+
+	@Override
+	public User findByEmail(String email) {
+		return userRepo.findByEmail(email);
+	}
+
+	@Override
+	public Optional<User> findById(Long id) {
+		return userRepo.findById(id);
 	}
 	
 	

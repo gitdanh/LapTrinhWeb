@@ -1,6 +1,8 @@
 package vn.book.Entity;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,16 +15,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import vn.book.Config.Annotation.EnumValidator;
+import vn.book.Entity.Security.Authority;
+import vn.book.Util.UserRole;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "Users")
-public class User {
+public class User implements UserDetails{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "userId")
@@ -39,11 +47,12 @@ public class User {
 	private String address;
 	@Column(name = "avatar", columnDefinition = "varchar(max)")
 	private String avatar;
-	@Column(name = "userName", columnDefinition = "varchar(20)")
-	private String userName;
-	@Column(name = "password", columnDefinition = "varchar(25)")
+	@Column(name = "username", columnDefinition = "varchar(20)", unique = true)
+	private String username;
+	@Column(name = "password", columnDefinition = "varchar(150)")
 	private String password;
 	@Column(name = "role", columnDefinition = "varchar(10)")
+	@EnumValidator(enumClazz = UserRole.class)
 	private String role;
 	@Column(name = "isDelete")
 	private boolean isDelete;
@@ -61,4 +70,35 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Order> orders;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorites = new HashSet<>();
+		authorites.add(new Authority(role));
+		return authorites;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }
