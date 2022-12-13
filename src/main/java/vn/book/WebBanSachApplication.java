@@ -2,10 +2,13 @@ package vn.book;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+
+import vn.book.Config.CustomSiteMeshFilter;
 
 @SpringBootApplication
 public class WebBanSachApplication {
@@ -24,5 +27,12 @@ public class WebBanSachApplication {
 				));
 		return cloudinary;
 	}
+	
+	@Bean
+    public FilterRegistrationBean<CustomSiteMeshFilter> siteMeshFilter() {
+        FilterRegistrationBean<CustomSiteMeshFilter> filterRegistrationBean = new FilterRegistrationBean<CustomSiteMeshFilter>();
+        filterRegistrationBean.setFilter(new CustomSiteMeshFilter());
+        return filterRegistrationBean;
+    }
 
 }

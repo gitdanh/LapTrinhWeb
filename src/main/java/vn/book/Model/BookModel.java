@@ -32,7 +32,7 @@ public class BookModel {
 	
 	private int sold;
 	
-	private boolean isSelling;
+	private Boolean isSelling=true;
 	
 	private Long categoryId;
 	
