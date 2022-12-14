@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+</head>
+<body>
 
 <form:form action="register" method="post" modelAttribute="userModel">
 	<div class="form-group">
@@ -35,3 +41,5 @@
 	<button type="submit" class="btn btn-primary">Create
 		new account</button>
 </form:form>
+</body>
+</html>

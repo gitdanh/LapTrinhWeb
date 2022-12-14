@@ -99,10 +99,9 @@ public class AccountController {
 		 * userEntity.setPassword(password); userSer.save(userEntity);
 		 */
 
-		String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+		//String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
-		SimpleMailMessage email = mailConstructor.constructResetTokenEmail(appUrl, request.getLocale(), user.getEmail(),
-				otp);
+		SimpleMailMessage email = mailConstructor.constructOtpEmail(request.getLocale(), user.getEmail(), otp);
 
 		mailSender.send(email);
 
@@ -116,18 +115,11 @@ public class AccountController {
 		String trueOtp = (String) session.getAttribute("otp");
 		String username = (String) session.getAttribute("username");
 		String email = (String) session.getAttribute("email");
-		User userEntity = new User();
-		userEntity.setUsername(username);
-		userEntity.setEmail(email);
-		userEntity.setRole("USER");
-		Date date = new Date(System.currentTimeMillis());
-		userEntity.setCreateAt(date);
 		// user.setUsername(userEntity.getUsername());
-		System.out.print(username);
 		if (otp.equals(trueOtp)) {
-			userSer.save(userEntity);
 			UserModel user = new UserModel();
-			BeanUtils.copyProperties(userEntity, user);
+			user.setUsername(username);
+			user.setEmail(email);
 			model.addAttribute("user", user);
 			return "web/informationRegister";
 		}
@@ -136,53 +128,50 @@ public class AccountController {
 
 	}
 
-	
-	 
 	@PostMapping("newuserinfo")
-	public String updateUserInfo(@ModelAttribute("user") UserModel user,
+	public String updateUserInfo(@Valid @ModelAttribute("user") UserModel user,
 								@ModelAttribute("confirmPassword") String confirmPass,
-				ModelMap model) throws Exception {
-			User currentUser = userSer.findById(user.getUserId()).get();
-			
-			if(currentUser == null) {
-				throw new Exception ("User not found");
+								ModelMap model,
+								BindingResult result) throws Exception {
+			if(result.hasErrors()) {
+				return "web/informationRegister";
 			}
+			User userEntity = new User();
 			
 			/*check email already exists*/
 			if (userSer.findByEmail(user.getEmail())!=null) {
-				if(userSer.findByEmail(user.getEmail()).getUserId() != currentUser.getUserId()) {
 					model.addAttribute("emailExists", true);
 					return "web/informationRegister";
-				}
 			}
 			
 			/*check username already exists*/
 			if (userSer.findByUsername(user.getUsername())!=null) {
-				if(userSer.findByUsername(user.getUsername()).getUserId() != currentUser.getUserId()) {
 					model.addAttribute("usernameExists", true);
 					return "web/informationRegister";
-				}
 			}
-			
-//			update password
+			BeanUtils.copyProperties(user, userEntity);
+			//update password
 			if (user.getPassword() != null && !user.getPassword().isEmpty() && !user.getPassword().equals("")){
 				BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
 				if(confirmPass.equals(user.getPassword())) {
-					currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+					userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
 				} else {
 					model.addAttribute("incorrectConfirmPassword", true);
 					return "web/informationRegister";
 				}
 			}
 			
-			BeanUtils.copyProperties(user, currentUser);
+			userEntity.setRole("USER");
+			Date date = new Date(System.currentTimeMillis());
+			userEntity.setCreateAt(date);
+			
 			
 			if(!user.getAvatarFile().isEmpty()) {
 				try {
 					Map r = this.cloudinary.uploader().upload(user.getAvatarFile().getBytes(),
 							ObjectUtils.asMap("resource_type", "auto"));
 					String img = (String) r.get("secure_url");
-					currentUser.setAvatar(img);
+					userEntity.setAvatar(img);
 				} catch (Exception e) {
 					e.printStackTrace();
 					String message = "Error: Cannot upload file";
@@ -192,9 +181,9 @@ public class AccountController {
 				
 			}
 			
-			userSer.save(currentUser);
+			userSer.save(userEntity);
 			
-			UserDetails userDetails = userSecurityService.loadUserByUsername(currentUser.getUsername());
+			UserDetails userDetails = userSecurityService.loadUserByUsername(userEntity.getUsername());
 
 			Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
 					userDetails.getAuthorities());
