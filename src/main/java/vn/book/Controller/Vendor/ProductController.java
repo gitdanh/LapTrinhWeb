@@ -51,7 +51,7 @@ public class ProductController {
 	public String list(ModelMap model) {
 		List<Book> books = bookSer.findAll();
 		model.addAttribute("books", books);
-		return "vendor/listBook";
+		return "vendor/index";
 	}
 	
 	@GetMapping("add")
