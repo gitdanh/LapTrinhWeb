@@ -28,6 +28,7 @@ public class SecurityConfig {
 			"/css/**",
 			"/js/**",
 			"/image/**",
+			"/templates/**",
 			"/",
 			"/home",
 			"/register",
