@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import vn.book.Config.CustomUserDetails;
 import vn.book.Entity.User;
 import vn.book.Repository.UserRepository;
 
@@ -20,7 +21,7 @@ public class UserSecurityService implements UserDetailsService{
 		if(user == null) {
 			throw new UsernameNotFoundException("Không tìm thấy user");
 		}
-		return user;
+		return new CustomUserDetails(user);
 	}
 
 	
