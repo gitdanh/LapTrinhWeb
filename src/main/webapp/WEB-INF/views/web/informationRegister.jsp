@@ -36,7 +36,7 @@
 			<img id="image" alt="" src="${user.avatar}" style="width: 60%;">
 		</c:if>
 		<c:if test="${user.avatar == null}">
-			<img id="image" alt="" src="/templates/images/noimage.png"
+			<img id="image" alt="" src="/templates/images/noavatar.png"
 				style="width: 60px;">
 		</c:if>
 		<h4>
