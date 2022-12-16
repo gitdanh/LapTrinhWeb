@@ -19,4 +19,6 @@ public interface ICategoryService {
 
 	<S extends Category> S save(S entity);
 
+	List<Category> findByDeleteFalse();
+
 }

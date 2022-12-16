@@ -13,8 +13,8 @@
 <title>Shop</title>
 </head>
 <body>
-	<%@ include file="/common/vendor/header.jsp"%>
+	<%@ include file="/common/web/header.jsp"%>
 	<sitemesh:write property='body'></sitemesh:write>
-	<%@ include file="/common/vendor/footer.jsp"%>
+	<%@ include file="/common/web/footer.jsp"%>
 </body>
 </html>

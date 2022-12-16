@@ -1,5 +1,6 @@
 package vn.book.Controller.Web;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 import java.util.Random;
@@ -82,9 +83,17 @@ public class AccountController {
 		}
 		HttpSession session = request.getSession();
 		Random rand = new Random();
-		int otpvalue = rand.nextInt(125560);
-		String otp = Integer.toString(otpvalue);
-
+		int[] otpvalue = new int[6];
+		for(int i=0;i<6;i++) {
+			otpvalue[i] = rand.nextInt(6);
+		}
+		String otp = Arrays
+	            .stream(otpvalue)
+	            .mapToObj(String::valueOf)
+	            .reduce((a, b) -> a.concat(b))
+	            .get();
+		System.out.print(otp);
+		
 		session.setAttribute("otp", otp);
 		session.setAttribute("username", user.getUsername());
 		session.setAttribute("email", user.getEmail());

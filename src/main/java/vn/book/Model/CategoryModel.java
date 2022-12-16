@@ -23,7 +23,7 @@ public class CategoryModel {
 	
 	private String image;
 	private MultipartFile imageFile;
-	private boolean isDelete = false;
+	private boolean delete;
 	private Date createAt;
 	private Date updateAt;
 	private Boolean isEdit = false;
