@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -15,6 +16,8 @@ import vn.book.Entity.Book;
 import vn.book.Entity.Store;
 import vn.book.Repository.StoreRepository;
 import vn.book.Service.IStoreService;
+
+
 @Service
 public class StoreServiceImpl implements IStoreService{
 	@Autowired StoreRepository store;
@@ -24,17 +27,7 @@ public class StoreServiceImpl implements IStoreService{
 		store.delete(entity);
 	}
 
-	@Override
-	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
-		store.deleteById(id);
-	}
 
-	@Override
-	public long count() {
-		// TODO Auto-generated method stub
-		return store.count();
-	}
 
 	@Override
 	public boolean existsById(Long id) {
@@ -47,11 +40,6 @@ public class StoreServiceImpl implements IStoreService{
         store.saveAndFlush(store1);
     }
 
-	@Override
-	public Optional<Store> findById(Long id) {
-		// TODO Auto-generated method stub
-		return store.findById(id);
-	}
 
 	@Override
 	public List<Store> findAllById(Iterable<Long> ids) {
@@ -71,25 +59,6 @@ public class StoreServiceImpl implements IStoreService{
 		return store.findAll(pageable);
 	}
 
-	@Override
-	public List<Store> findAll() {
-		// TODO Auto-generated method stub
-		return store.findAll();
-	}
-
-	@Override
-	public <S extends Store> S save(S entity) {
-		// TODO Auto-generated method stub
-		Optional<Store> opt = findById(entity.getStoreId());
-		if(opt.isPresent()) {
-			if(StringUtils.isEmpty(entity.getAvatar())) {
-				entity.setAvatar(opt.get().getAvatar());
-			}else {
-				entity.setAvatar(entity.getAvatar());
-			}
-		}
-		return store.save(entity);
-	}
 
 	@Override
 	public List<Store> findBystoreNameContaining(String name) {
@@ -102,5 +71,53 @@ public class StoreServiceImpl implements IStoreService{
 		// TODO Auto-generated method stub
 		return store.findBystoreNameContaining(name, p);
 	}
+
+
+
+
+@Service
+public class StoreServiceImpl implements IStoreService{
+	@Autowired
+	StoreRepository storeRepo;
+
+	public StoreServiceImpl(StoreRepository storeRepo) {
+		this.storeRepo = storeRepo;
+	}
+
+	@Override
+	public <S extends Store> S save(S entity) {
+		return storeRepo.save(entity);
+	}
+
+	@Override
+	public List<Store> findAll() {
+		return storeRepo.findAll();
+	}
+
+	@Override
+	public Optional<Store> findById(Long id) {
+		return storeRepo.findById(id);
+	}
+
+	@Override
+	public <S extends Store> boolean exists(Example<S> example) {
+		return storeRepo.exists(example);
+	}
+
+	@Override
+	public long count() {
+		return storeRepo.count();
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		storeRepo.deleteById(id);
+	}
+
+	@Override
+	public Store findByOwner(User owner) {
+		return storeRepo.findByOwner(owner);
+	}
+	
 
 }

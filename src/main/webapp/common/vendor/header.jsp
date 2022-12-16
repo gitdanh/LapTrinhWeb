@@ -12,22 +12,22 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="#"> <i
-					class="fa fa-home"></i> Home <span class="sr-only">(current)</span>
+			<li class="nav-item active"><a class="nav-link" href="/vendor/product/onsale"> <i
+					class="fa fa-home"></i> Sản phẩm <span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#"> <i
-					class="fa fa-envelope-o"> <span class="badge badge-danger">11</span>
-				</i> Your Store
+			<li class="nav-item"><a class="nav-link" href="/vendor/storeprofile"> <i
+					class="fa fa-envelope-o"> <span class="badge badge-danger"></span>
+				</i> Cửa hàng
 			</a></li>
-			<li class="nav-item"><a class="nav-link " href="#"> <i
-					class="fa fa-envelope-o"> <span class="badge badge-warning">11</span>
+			<li class="nav-item"><a class="nav-link " href="/vendor/dashboard"> <i
+					class="fa fa-envelope-o"> <span class="badge badge-warning"></span>
 				</i> Dash Board
 			</a></li>
 		</ul>
 		<ul class="navbar-nav ">
-			<li class="nav-item"><a class="nav-link" href="#"> <i
-					class="fa fa-bell"> <span class="badge badge-info">11</span>
-				</i> Order
+			<li class="nav-item"><a class="nav-link" href="/vendor/order"> <i
+					class="fa fa-bell"> <c:if test="${newOrders!=0}"><span class="badge badge-info">${newOrders}</span></c:if>
+				</i> Đơn đặt hàng
 			</a></li>
 		</ul>
 		<form class="form-inline my-2 my-lg-0">

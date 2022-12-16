@@ -9,7 +9,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import vn.book.Entity.Book;
-@Service
+
+import vn.book.Entity.Store;
+
+
 public interface IBookService {
 
 	void delete(Book entity);
@@ -31,6 +34,15 @@ public interface IBookService {
 	List<Book> findAll();
 
 	<S extends Book> S save(S entity);
+
 	List<Book> findBybookNameContaining(String name);
 	Page<Book> findBybookNameContaining(String name,Pageable p);
+
+
+	List<Book> findByStore(Store store);
+
+	List<Book> findByStoreAndSellingFalse(Store store);
+
+	List<Book> findByStoreAndSellingTrue(Store store);
+
 }

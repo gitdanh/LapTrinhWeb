@@ -31,7 +31,7 @@ public class Category {
 	@Column(name = "image", columnDefinition = "varchar(max)")
 	private String image;
 	@Column(name = "isDelete")
-	private boolean isDelete;
+	private boolean delete;
 	@Column(name = "createAt", columnDefinition = "date")
 	private Date createAt;
 	@Column(name = "updateAt", columnDefinition = "date")

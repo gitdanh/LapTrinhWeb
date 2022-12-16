@@ -1,5 +1,6 @@
 package vn.book.Service.Impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import vn.book.Entity.Book;
+import vn.book.Entity.Store;
 import vn.book.Repository.BookRepository;
 import vn.book.Service.IBookService;
-
 
 @Service
 public class BookServiceImpl implements IBookService {
@@ -41,14 +42,21 @@ public class BookServiceImpl implements IBookService {
     }
 	@Override
 	public <S extends Book> S save(S entity) {
-		Optional<Book> opt = findById(entity.getBookId());
-		if(opt.isPresent()) {
-			if(StringUtils.isEmpty(entity.getImage())) {
-				entity.setImage(opt.get().getImage());
-			}else {
-				entity.setImage(entity.getImage());
+		if (entity.getBookId() != null) {
+			Optional<Book> opt = findById(entity.getBookId());
+			Date date = new Date(System.currentTimeMillis());
+			if (opt.isPresent()) {
+				if (StringUtils.isEmpty(entity.getImage())) {
+					entity.setImage(opt.get().getImage());
+				} else {
+					entity.setImage(entity.getImage());
+				}
+				entity.setCreateAt(opt.get().getCreateAt());
+				entity.setUpdateAt(date);
 			}
 		}
+		Date date = new Date(System.currentTimeMillis());
+		entity.setCreateAt(date);
 		return bookRepo.save(entity);
 	}
 
@@ -96,7 +104,20 @@ public class BookServiceImpl implements IBookService {
 	public void delete(Book entity) {
 		bookRepo.delete(entity);
 	}
-	
-	
-	
+
+	@Override
+	public List<Book> findByStore(Store store) {
+		return bookRepo.findByStore(store);
+	}
+
+	@Override
+	public List<Book> findByStoreAndSellingTrue(Store store) {
+		return bookRepo.findByStoreAndSellingTrue(store);
+	}
+
+	@Override
+	public List<Book> findByStoreAndSellingFalse(Store store) {
+		return bookRepo.findByStoreAndSellingFalse(store);
+	}
+
 }

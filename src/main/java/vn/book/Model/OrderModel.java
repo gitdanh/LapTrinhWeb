@@ -23,7 +23,7 @@ public class OrderModel {
 	
 	private String status;
 	
-	private boolean isPaidBefore;
+	private boolean paidBefore;
 	
 	private double amountFromUser;
 	

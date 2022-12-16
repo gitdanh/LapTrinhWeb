@@ -39,9 +39,9 @@ public class Store {
 	@Column(name = "avatar", columnDefinition = "varchar(max)")
 	private String avatar;
 	@Column(name = "isActive")
-	private boolean isActive;
+	private boolean active;
 	@Column(name = "isOpen")
-	private boolean isOpen;
+	private boolean open;
 	@Column(name = "createAt", columnDefinition = "date")
 	private Date createAt;
 	@Column(name = "updateAt", columnDefinition = "date")
