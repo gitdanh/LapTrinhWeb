@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import vn.book.Entity.Book;
 import vn.book.Entity.Store;
@@ -37,5 +38,8 @@ public interface IBookService {
 	List<Book> findByStoreAndSellingFalse(Store store);
 
 	List<Book> findByStoreAndSellingTrue(Store store);
+
+	List<Book> findBybookNameContaining(String name);
+	Page<Book> findBybookNameContaining(String name,Pageable p);
 
 }
