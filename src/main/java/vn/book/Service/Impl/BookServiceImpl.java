@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import vn.book.Entity.Book;
@@ -17,13 +18,27 @@ import vn.book.Service.IBookService;
 
 @Service
 public class BookServiceImpl implements IBookService {
+	@Override
+	public Page<Book> findBybookNameContaining(String name, Pageable p) {
+		// TODO Auto-generated method stub
+		return bookRepo.findBybookNameContaining(name, p);
+	}
+	@Override
+	public List<Book> findBybookNameContaining(String name) {
+		// TODO Auto-generated method stub
+		return bookRepo.findBybookNameContaining(name);
+	}
+
 	@Autowired
 	BookRepository bookRepo;
 
 	public BookServiceImpl(BookRepository bookRepo) {
 		this.bookRepo = bookRepo;
 	}
-
+	@Transactional
+    public void addClient(Book book){
+        bookRepo.saveAndFlush(book);
+    }
 	@Override
 	public <S extends Book> S save(S entity) {
 		Optional<Book> opt = findById(entity.getBookId());

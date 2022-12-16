@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -10,11 +10,11 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<title>Shop</title>
+<title>User</title>
 </head>
 <body>
-	<%@ include file="/common/web/header.jsp"%>
+	<%@ include file="/common/user/header.jsp"%>
 	<sitemesh:write property='body'></sitemesh:write>
-	<%@ include file="/common/web/footer.jsp"%>
+	<%@ include file="/common/user/footer.jsp"%>
 </body>
 </html>
