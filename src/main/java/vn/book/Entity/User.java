@@ -54,7 +54,8 @@ public class User {
 	private Date createAt;
 	@Column(name = "updateAt", columnDefinition = "date")
 	private Date updateAt;
-	
+	@Column(name = "reset_password_token")
+    private String resetPasswordToken;
 	//kết nối 1 to 1 với Store
 	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
 	private Store store;

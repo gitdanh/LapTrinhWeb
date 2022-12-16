@@ -17,7 +17,7 @@
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="#"> <i
 					class="fa fa-envelope-o"> <span class="badge badge-danger">11</span>
-				</i> qwioeuqwio
+				</i> Your Store
 			</a></li>
 			<li class="nav-item"><a class="nav-link " href="#"> <i
 					class="fa fa-envelope-o"> <span class="badge badge-warning">11</span>

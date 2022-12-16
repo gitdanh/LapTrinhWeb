@@ -29,8 +29,8 @@ public class SecurityConfig {
 			"/js/**",
 			"/image/**",
 			"/templates/**",
-			"/",
-			"/home",
+			"/**",
+			"/home/**",
 			"/register",
 			"/verifyRegister",
 			"/newuserinfo",
@@ -38,28 +38,35 @@ public class SecurityConfig {
 			"/login",
 			"/fonts/**",
 			"/detail",
-			"/search"
-			
+
+			"/search",
+
 	};
 
 	@Bean
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/admin/*").hasAuthority("ADMIN");
 		
+
+		http.authorizeRequests().antMatchers("/user/*").hasAuthority("USER");
+		
+
 		http.authorizeRequests().antMatchers("/vendor/*").hasAuthority("USER");
+
 		
 		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS)
 			.permitAll().anyRequest().authenticated();
 		
 		http.csrf().disable().cors().disable()
-			.formLogin().failureUrl("/login?error")
+			.formLogin().failureUrl("/login?error").defaultSuccessUrl("/user", true)
 			//.defaultSuccessUrl("/home")
 			.loginPage("/login").permitAll()
 			.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()
+			.logoutSuccessUrl("/login").deleteCookies("remember-me").permitAll()
 			.and()
 			.rememberMe();
+		
 		
 		return http.build();
 	}
