@@ -48,12 +48,12 @@
 		<div class="form-group">
 			<label for="userName">UserName</label> <input type="text"
 				class="form-control" id="userName" name="username"
-				value="${user.username}" />
+				value="${user.username}" readonly="readonly"/>
 		</div>
 
 		<div class="form-group">
 			<label for="email">Email: </label> <input type="text"
-				class="form-control" id="email" name="email" value="${user.email}" />
+				class="form-control" id="email" name="email" value="${user.email}" readonly="readonly" />
 		</div>
 		<div class="form-group">
 			<label for="phone">Phone: </label> <input type="text"

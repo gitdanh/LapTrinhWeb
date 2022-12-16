@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import vn.book.Entity.Book;
+import vn.book.Entity.Store;
 
 public interface IBookService {
 
@@ -30,5 +31,11 @@ public interface IBookService {
 	List<Book> findAll();
 
 	<S extends Book> S save(S entity);
+
+	List<Book> findByStore(Store store);
+
+	List<Book> findByStoreAndSellingFalse(Store store);
+
+	List<Book> findByStoreAndSellingTrue(Store store);
 
 }

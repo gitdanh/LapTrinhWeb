@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
 <!-- Site footer -->
 <footer class="site-footer">
 	<div class="fixed-bottom">
