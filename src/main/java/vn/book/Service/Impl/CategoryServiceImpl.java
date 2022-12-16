@@ -48,6 +48,11 @@ public class CategoryServiceImpl implements ICategoryService{
 	public void deleteById(Long id) {
 		cateRepo.deleteById(id);
 	}
+
+	@Override
+	public List<Category> findByDeleteFalse() {
+		return cateRepo.findByDeleteFalse();
+	}
 	
 	
 }

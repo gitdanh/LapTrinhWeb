@@ -10,10 +10,15 @@ import org.springframework.stereotype.Repository;
 
 import vn.book.Entity.Book;
 import vn.book.Entity.Store;
+import vn.book.Entity.User;
 
 @Repository
 @EnableJpaRepositories
 public interface StoreRepository extends JpaRepository<Store, Long> {
+
+	Store findByOwner(User owner);
+
 	List<Store> findBystoreNameContaining(String name);
 	Page<Store> findBystoreNameContaining(String name,Pageable p);
+
 }

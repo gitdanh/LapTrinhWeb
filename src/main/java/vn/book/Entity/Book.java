@@ -47,7 +47,7 @@ public class Book {
 	@Column(name = "sold")
 	private int sold;
 	@Column(name = "isSelling")
-	private boolean isSelling;
+	private boolean selling;
 	@ManyToOne
 	@JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
 	private Category category;
