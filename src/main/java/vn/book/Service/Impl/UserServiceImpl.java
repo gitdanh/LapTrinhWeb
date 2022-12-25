@@ -1,5 +1,6 @@
 package vn.book.Service.Impl;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,6 @@ public class UserServiceImpl implements IUserService {
 //		// TODO Auto-generated method stub
 //		return customerRepo.updatUser(user);
 //	}
-
 	@Autowired
 	private UserRepository customerRepo;
 	@Override
@@ -111,24 +112,14 @@ public class UserServiceImpl implements IUserService {
 	public Optional<User> findById(Long id) {
 		return userRepo.findById(id);
 	}
-
-	@Override
-	public User getCurrentlyLoggedInUser(Authentication authen) {
-		// TODO Auto-generated method stub
-		if(authen == null) return null;
-		User user = null;
-		Object principal = authen.getPrincipal();
-		if(principal instanceof CustomUserDetails) {
-			user = ((CustomUserDetails) principal).getUser();
-		} else if(principal)
-		return null;
-	}
-
-	@Override
-	public User getUser() {
-		// TODO Auto-generated method stub
-		return userRepo.getUser();
-	}
 	
+
+	@Override
+	public User getCurrentlyLoggedInUser(Principal principal) {
+		String username = principal.getName();
+		User userEntity = findByUsername(username);
+		
+		return userEntity;
+	}
 	
 }	

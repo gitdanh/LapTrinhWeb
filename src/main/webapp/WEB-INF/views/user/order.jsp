@@ -10,7 +10,6 @@
 					<div class="portlet-title">
 						<div
 							class="caption d-flex justify-content-center align-items-center">
-							<i class="fa fa-globe"><a href="/vendor/dashboard">Quản lý Store</a></i>
 						</div>
 						<div class="tools">
 							<a href="javascript:;" class="collapse"> </a> <a
@@ -26,7 +25,7 @@
 							<!-- Kết thúc hiển thị thông báo -->
 							<div class="row mt-2 mb-2">
 								<div class="col-md-6">
-									<form action="/home/storeListByPage">
+									<form action="/user/orderList">
 										<div class="input-group">
 											<input type="text" class="form-control ml-2" name="name"
 												id="name" placeholder="Nhập để tìm kiếm">
@@ -34,30 +33,29 @@
 											</button>
 										</div>
 								</div>
-								<c:if test="${!storePage.hasContent()}">
+								<c:if test="${!orderPage.hasContent()}">
 									<div class="row">
 										<div class="col">
 											<div class="alert alert-danger">Khong thayas</div>
 										</div>
 									</div>
 								</c:if>
-								<c:if test="${storePage.hasContent()}">
+								<c:if test="${orderPage.hasContent()}">
 									<table class="table table-striped table-responsive">
 										<thead class="thear-inverse">
-											<tr>
-												<th>Store Name</th>
-												<th>Description</th>
-												<th>storeId</th>
-												<th>createAt</th>
-											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${storePage.content}" var="store">
+											<c:forEach items="${orderPage.content}" var="order">
 												<tr>
-													<td>${store.storeName}</td>
-													<td>${store.description}</td>
-													<td>${store.storeId}</td>
-													<td>${store.createAt}</td>
+													<td>${order.orderId}</td>
+													<td>${order.store.storeId}</td>
+													<%-- <td>${order.}</td>
+													<td>${order.}</td>
+													<td>${order.}</td>
+													<td>${order.}</td> --%>
+													<%-- <form:button action="/addToCart" method="POST">
+														<input type"number" name="quantity" class="form-control">
+													</form:button> --%>
 												</tr>
 
 											</c:forEach>
@@ -65,48 +63,48 @@
 										</tbody>
 									</table>
 								</c:if>
+
 								<div class="row">
-									<form action="/home/listByPage">
+									<form action="/user/orderList">
 										<div class="mb-3 input-group float-left">
-											<label for="size" class="mr-2">Page size:</label> <select
-												class="form-select ml-2" name="size" aria-label="size"
+											<label for="size" class="mr-2">Page size:</label> 
+											<select	class="form-select ml-2" name="size" aria-label="size"
 												id="size" onchange="this.form.submit()">
-												<option ${storePage.size==1 ? 'selected':''} value="1">1</option>
-												<option ${storePage.size==3 ? 'selected':''} value="3">3</option>
-												<option ${storePage.size==5 ? 'selected':''} value="5">5</option>
-												<option ${storePage.size==7 ? 'selected':''} value="7">7</option>
+												<option ${orderPage.size==1 ? 'selected':''} value="1">1</option>
+												<option ${orderPage.size==3 ? 'selected':''} value="3">3</option>
+												<option ${orderPage.size==5 ? 'selected':''} value="5">5</option>
+												<option ${orderPage.size==7 ? 'selected':''} value="7">7</option>
 											</select>
 										</div>
 									</form>
 								</div>
 
-								<c:if test="${storePage.totalPages > 0}">
+								<c:if test="${orderPage.totalPages > 0}">
 									<nav aria-label="Page navigation example">
 										<ul class="pagination">
 											<li
-												class="${1==storePage.number +1 ? 'page-team active':'page-item' }">
+												class="${1==orderPage.number +1 ? 'page-team active':'page-item' }">
 												<a class="page-link"
-												href="<c:url value='/home/storeListByPage?name=${storeName}&size=${storePage.size}&page=${1}'/>"
+												href="<c:url value='/user/orderList?name=${bookName}&size=${orderPage.size}&page=${1}'/>"
 												tabindex="-1" aria-disabled="true">First</a>
 											</li>
 											<c:forEach items="${pageNumbers}" var="pageNumber">
-												<c:if test="${storePage.totalPages > 1}">
+												<c:if test="${orderPage.totalPages > 1}">
 													<li
-														class="${pageNumber == storePage.number +1 ? 'page-item active':'page-item'}"><a
+														class="${pageNumber == orderPage.number +1 ? 'page-item active':'page-item'}"><a
 														class="page-link"
-														href="<c:url value='/home/storeListByPage?name=${storeName}&size=${storePage.size}&page=${pageNumber}'/>">${pageNumber}</a></li>
+														href="<c:url value='/user/orderList?name=${bookName}&size=${orderPage.size}&page=${pageNumber}'/>">${pageNumber}</a></li>
 												</c:if>
 											</c:forEach>
 											<li
-												class="${storePage.totalPages == storePage.number + 1 ? 'page-item active':'page-item'}">
+												class="${orderPage.totalPages == orderPage.number + 1 ? 'page-item active':'page-item'}">
 												<a
-												href="<c:url value='/home/storeListByPage?name=${storeName}&size=${storePage.size}&page=${storePage.totalPages}'/>"
+												href="<c:url value='/user/orderList?name=${bookName}&size=${orderPage.size}&page=${orderPage.totalPages}'/>"
 												class="page-link">Last</a>
 											</li>
 										</ul>
 									</nav>
 								</c:if>
-
 							</div>
 						</div>
 					</div>

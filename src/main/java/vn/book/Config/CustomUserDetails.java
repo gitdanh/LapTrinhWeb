@@ -15,13 +15,12 @@ import vn.book.Repository.UserRepository;
 public class CustomUserDetails implements UserDetails{
 
 	private User user;
-	private UserRepository userepo;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Collections.singleton(new SimpleGrantedAuthority(user.getRole()));
 	}
 	
-
+	
 
 	@Override
 	public String getPassword() {

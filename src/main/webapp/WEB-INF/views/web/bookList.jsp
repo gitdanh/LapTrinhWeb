@@ -62,6 +62,9 @@
 													<td>${book.price}</td>
 													<td>${book.promotionalPrice}</td>
 													<td>${book.rating}</td>
+													<%-- <form:button action="/addToCart" method="POST">
+														<input type"number" name="quantity" class="form-control">
+													</form:button> --%>
 												</tr>
 
 											</c:forEach>
@@ -73,8 +76,8 @@
 								<div class="row">
 									<form action="/home/listByPage">
 										<div class="mb-3 input-group float-left">
-											<label for="size" class="mr-2">Page size:</label> 
-											<select	class="form-select ml-2" name="size" aria-label="size"
+											<label for="size" class="mr-2">Page size:</label> <select
+												class="form-select ml-2" name="size" aria-label="size"
 												id="size" onchange="this.form.submit()">
 												<option ${bookPage.size==1 ? 'selected':''} value="1">1</option>
 												<option ${bookPage.size==3 ? 'selected':''} value="3">3</option>
@@ -120,3 +123,50 @@
 		</div>
 	</div>
 </div>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$(".minusButton").on("click", function(event) {
+			event.preventDefault();
+			decreaseQuantity($(this));
+		});
+		$(".plusButton").on("click", function(event) {
+			event.preventDefault();
+			increaseQuantity($(this));
+		});
+		updateTotal();
+	});
+
+	function decreaseQuantity(link) {
+		id = link.attr("pid");
+		qtyInput = $("#quantity" + id);
+		newQty = parseInt(qtyInput.val()) - 1;
+		if (newQty > 0) {
+			qtyInput.val(newQty);
+			updateQuantity();
+		}
+	}
+
+	function increaseQuantity(link) {
+		id = link.attr("pid");
+		qtyInput = $("#quantity" + id);
+		newQty = parseInt(qtyInput.val()) + 1;
+		if (newQty < 10) {
+			qtyInput.val(newQty);
+			updateQuantity();
+		}
+	}
+
+	function updateQuantity() {
+
+	}
+
+	function updateTotal() {
+		total = 0.0;
+		$(".productSubtotal").each(function(index, element) {
+			total = total + parseFloat(element.innerHTML);
+		});
+		$("#totalAmount").text(total);
+	}
+</script>

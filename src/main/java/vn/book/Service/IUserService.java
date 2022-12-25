@@ -1,5 +1,6 @@
 package vn.book.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +17,8 @@ import vn.book.Entity.User;
 public interface IUserService {
 
 	void deleteAll(Iterable<? extends User> entities);
-	User getUser();
 	
-	User getCurrentlyLoggedInUser(Authentication authen);
+	User getCurrentlyLoggedInUser(Principal principal);
 
 	void deleteAllById(Iterable<? extends Long> ids);
 

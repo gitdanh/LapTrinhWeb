@@ -38,14 +38,16 @@ public class SecurityConfig {
 			"/login",
 			"/fonts/**",
 			"/detail",
-			"/search"
+			"/search",
 	};
 
 	@Bean
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/admin/*").hasAuthority("ADMIN");
 		
-		http.authorizeRequests().antMatchers("/vendor/*","/user/*").hasAuthority("USER");
+		http.authorizeRequests().antMatchers("/vendor/**","/user/**","/cart/**").hasAuthority("USER");
+		
+		http.authorizeRequests().antMatchers("/cart/**").authenticated();
 		
 		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS)
 			.permitAll().anyRequest().authenticated();

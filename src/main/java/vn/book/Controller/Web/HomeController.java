@@ -1,5 +1,6 @@
 package vn.book.Controller.Web;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,14 +10,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import vn.book.Entity.Book;
+import vn.book.Entity.Cart;
+import vn.book.Entity.CartItem;
 import vn.book.Entity.Store;
+import vn.book.Entity.User;
+import vn.book.Model.BookModel;
+import vn.book.Repository.CartItemRepository;
+import vn.book.Repository.CartRepository;
 import vn.book.Service.IBookService;
+import vn.book.Service.ICartService;
 import vn.book.Service.IStoreService;
+import vn.book.Service.IUserService;
 
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -27,8 +39,19 @@ import java.util.stream.IntStream;
 @Controller
 @RequestMapping("home")
 public class HomeController {
+	@Autowired
 	IBookService bookService;
+	@Autowired
 	IStoreService storeService;
+	@Autowired
+	CartItemRepository itemrepo;
+	@Autowired
+	IUserService userService;
+	@Autowired
+	CartRepository cartRepo;
+	@Autowired
+	ICartService cartService;
+	
 	@RequestMapping("")
 	public String homePage() {
 		return "web/index";
@@ -42,37 +65,15 @@ public class HomeController {
 	public void setBookService(IBookService bookService){
         this.bookService=bookService;
     }
+	
+	
+	
 	@Autowired
 	public void setStoreService(IStoreService storeService){
         this.storeService=storeService;
     }
 	
-	@GetMapping( "list")
-	public String search(ModelMap model, @RequestParam(name="name",required = false) String name)
-	{
-		List<Book> list = null;
-		if(StringUtils.hasText(name))
-		{
-			list = bookService.findBybookNameContaining(name);
-		} else {
-			list= bookService.findAll();
-		}
-		model.addAttribute("books",list);
-		return "web/bookList";
-	}
-	@GetMapping("listShop")
-	public String searchShop(ModelMap model, @RequestParam(name="name",required = false) String name)
-	{
-		List<Store> list = null;
-		if(StringUtils.hasText(name))
-		{
-			list = storeService.findBystoreNameContaining(name);
-		} else {
-			list= storeService.findAll();
-		}
-		model.addAttribute("stores",list);
-		return "web/storeList";
-	}
+
 	@GetMapping("listByPage")
 	public String searchByPage(ModelMap model, @RequestParam(name="name",required = false)   String name, 
 			@RequestParam("page") Optional<Integer> page,@RequestParam("size")Optional<Integer> size)

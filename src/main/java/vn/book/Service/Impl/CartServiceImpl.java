@@ -1,59 +1,43 @@
 package vn.book.Service.Impl;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
+
+import vn.book.Entity.Book;
+import vn.book.Entity.Cart;
 import vn.book.Entity.CartItem;
 import vn.book.Entity.User;
+import vn.book.Repository.CartItemRepository;
+import vn.book.Repository.CartRepository;
 import vn.book.Service.ICartService;
 
-public class CartServiceImpl implements ICartService {
 
-	private Map<Integer, CartItem> map= new HashMap<Integer, CartItem>();
+@Service
+public class CartServiceImpl implements ICartService{
+
+	@Autowired
+	CartRepository cartRepo;
+	
+	@Autowired
+	CartItemRepository itemRepo;
 	
 	@Override
-	public void addItem(CartItem item)
-	{
-		
-		Integer itemId = item.getId().intValue();
-		CartItem existed = map.get(itemId);
-		if(existed != null)
-		{
-			existed.setCount(item.getCount()+existed.getCount());
-		}
-		else {
-			map.put(itemId, item);
-		}	
-	}
-	@Override
-	public void remove(CartItem item)
-	{
-		Integer itemId = item.getId().intValue();
-		map.remove(itemId);
-	}
-	
-	@Override
-	public Collection<CartItem> listCartItem(User user) {
+	public List<CartItem> listCartItem(User user) {
 		// TODO Auto-generated method stub
-		return map.values();
+		Cart cart= cartRepo.findByuser(user);
+		List<CartItem> list= itemRepo.findBycart(cart);
+		return list;
 	}
-	@Override
-	public void clearCart() {
-		map.clear();
-	}
-	@Override
-	public void update(int id,int quan) {
-		CartItem item = map.get(id);
-		item.setCount(quan + item.getCount());
-		if(item.getCount() <=0) {
-			map.remove(id);
-		}
-	}
-	@Override
-	public int getAmmount()
-	{
-		return map.values().size();
-	}
+	
+//	public CartItem findItem(Book book,Cart cart) {
+//		CartItem carTitem;
+//		carTitem=itemRepo.findBybookAndcart(book, cart);
+//		return carTitem;
+//	}
+	
 }
+

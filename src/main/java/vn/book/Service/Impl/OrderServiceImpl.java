@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import vn.book.Entity.Order;
 import vn.book.Entity.Store;
+import vn.book.Entity.User;
 import vn.book.Repository.OrderRepository;
 import vn.book.Service.IOrderService;
 
@@ -64,6 +67,18 @@ public class OrderServiceImpl implements IOrderService{
 	@Override
 	public Optional<Order> findById(Long id) {
 		return orderRepo.findById(id);
+	}
+
+	@Override
+	public Page<Order> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return orderRepo.findAll(pageable);
+	}
+
+	@Override
+	public Page<Order> findAllByUser(User user, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return orderRepo.findAllByuser(user, pageable);
 	}
 	
 	

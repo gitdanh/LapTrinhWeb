@@ -10,7 +10,7 @@
 					<div class="portlet-title">
 						<div
 							class="caption d-flex justify-content-center align-items-center">
-							<i class="fa fa-globe"></i>Quản lý Store
+							<i class="fa fa-globe"><a href="/vendor/dashboard">Quản lý Store</a></i>
 						</div>
 						<div class="tools">
 							<a href="javascript:;" class="collapse"> </a> <a

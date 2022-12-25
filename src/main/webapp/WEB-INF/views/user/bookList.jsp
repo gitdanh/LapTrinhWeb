@@ -26,7 +26,7 @@
 							<!-- Kết thúc hiển thị thông báo -->
 							<div class="row mt-2 mb-2">
 								<div class="col-md-6">
-									<form action="/list">
+									<form action="/user/list">
 										<div class="input-group">
 											<input type="text" class="form-control ml-2" name="name"
 												id="name" placeholder="Nhập để tìm kiếm">
@@ -34,41 +34,103 @@
 											</button>
 										</div>
 								</div>
-								<table class="table table-striped table-responsive">
-									<thead class="thear-inverse">
-										<tr>
-											<th>Book Name</th>
-											<th>Author</th>
-											<th>Sold</th>
-											<th>Price</th>
-											<th>Sale</th>
-											<th>Rating</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${books}" var="book">
+								<c:if test="${!bookPage.hasContent()}">
+									<div class="row">
+										<div class="col">
+											<div class="alert alert-danger">Khong thayas</div>
+										</div>
+									</div>
+								</c:if>
+								<c:if test="${bookPage.hasContent()}">
+									<table class="table table-striped table-responsive">
+										<thead class="thear-inverse">
 											<tr>
-												<td>${book.bookName}</td>
-												<td>${book.author}</td>
-												<td>${book.sold}</td>
-												<td>${book.price}</td>
-												<td>${book.promotionalPrice}</td>
-												<td>${book.rating}</td>
+												<th>Book Name</th>
+												<th>Author</th>
+												<th>Sold</th>
+												<th>Price</th>
+												<th>Sale</th>
+												<th>Rating</th>
 											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${bookPage.content}" var="book">
+												<tr>
+													<td>${book.bookName}</td>
+													<td>${book.author}</td>
+													<td>${book.sold}</td>
+													<td>${book.price}</td>
+													<td>${book.promotionalPrice}</td>
+													<td>${book.rating}</td>
+													<td>
+													<input type="number" id="quan">
+														<%-- <ul class="pagination">
+															<li class="page-item"><a
+																class="page-link minusButton" href="" th:pid="${id}"><b>-</b></a></li>
+															<li class="page-item">
+															<input type="text"
+																class="form-control text-center"
+																onkeydown="return false" style="width: 55px;" id="quan" />
+															</li>
+															<li class="page-item"><a
+																class="page-link plusButton" href="" th:pid="${id}"><b>+</b></a></li>
+														</ul> --%>
+													</td>
+													
+													<td><a <%-- href="/user/add/${book.bookId}/quan" --%> href="" id="add" onclick="getById(${book.bookId})">Add</a>&nbsp;													
+														<%-- <a href="/vendor/product/delete/${book.bookId}" data-id="${book.bookId}"
+					data-name="${book.bookName}">Xóa</a></td> --%> <%-- <form:button action="/addToCart" method="POST">
+														<input type"number" name="quantity" class="form-control">
+													</form:button> --%>
+												</tr>
 
-										</c:forEach>
+											</c:forEach>
 
-									</tbody>
-								</table>
-								<nav aria-label="Page navigation example">
-									<ul class="pagination">
-										<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-										<li class="page-item"><a class="page-link" href="#">1</a></li>
-										<li class="page-item"><a class="page-link" href="#">2</a></li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
-										<li class="page-item"><a class="page-link" href="#">Next</a></li>
-									</ul>
-								</nav>
+										</tbody>
+									</table>
+								</c:if>
+
+								<div class="row">
+									<form action="/user/list">
+										<div class="mb-3 input-group float-left">
+											<label for="size" class="mr-2">Page size:</label> <select
+												class="form-select ml-2" name="size" aria-label="size"
+												id="size" onchange="this.form.submit()">
+												<option ${bookPage.size==1 ? 'selected':''} value="1">1</option>
+												<option ${bookPage.size==3 ? 'selected':''} value="3">3</option>
+												<option ${bookPage.size==5 ? 'selected':''} value="5">5</option>
+												<option ${bookPage.size==7 ? 'selected':''} value="7">7</option>
+											</select>
+										</div>
+									</form>
+								</div>
+
+								<c:if test="${bookPage.totalPages > 0}">
+									<nav aria-label="Page navigation example">
+										<ul class="pagination">
+											<li
+												class="${1==bookPage.number +1 ? 'page-team active':'page-item' }">
+												<a class="page-link"
+												href="<c:url value='/user/list?name=${bookName}&size=${bookPage.size}&page=${1}'/>"
+												tabindex="-1" aria-disabled="true">First</a>
+											</li>
+											<c:forEach items="${pageNumbers}" var="pageNumber">
+												<c:if test="${bookPage.totalPages > 1}">
+													<li
+														class="${pageNumber == bookPage.number +1 ? 'page-item active':'page-item'}"><a
+														class="page-link"
+														href="<c:url value='/user/list?name=${bookName}&size=${bookPage.size}&page=${pageNumber}'/>">${pageNumber}</a></li>
+												</c:if>
+											</c:forEach>
+											<li
+												class="${bookPage.totalPages == bookPage.number + 1 ? 'page-item active':'page-item'}">
+												<a
+												href="<c:url value='/user/list?name=${bookName}&size=${bookPage.size}&page=${bookPage.totalPages}'/>"
+												class="page-link">Last</a>
+											</li>
+										</ul>
+									</nav>
+								</c:if>
 							</div>
 						</div>
 					</div>
@@ -78,3 +140,4 @@
 		</div>
 	</div>
 </div>
+
