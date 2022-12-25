@@ -38,4 +38,12 @@ public interface IBookService {
 
 	List<Book> findByStoreAndSellingTrue(Store store);
 
+	Page<Book> findByBookNameContaining(String name, Pageable pageable);
+
+	List<Book> findByBookNameContaining(String name);
+
+	Page<Book> findAllByStoreAndBookNameContainingAndCategoryDeleteFalse(Optional<Store> store, String name, Pageable pageable);
+
+	Page<Book> findAllByStoreAndCategoryDeleteFalse(Optional<Store> store, Pageable pageable);
+
 }

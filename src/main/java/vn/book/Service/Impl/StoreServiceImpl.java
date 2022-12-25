@@ -1,11 +1,15 @@
 package vn.book.Service.Impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import vn.book.Entity.Store;
 import vn.book.Entity.User;
@@ -23,6 +27,24 @@ public class StoreServiceImpl implements IStoreService{
 
 	@Override
 	public <S extends Store> S save(S entity) {
+		if(entity.getStoreId() != null) {
+			Optional<Store> opt = findById(entity.getStoreId());
+			Date date = new Date(System.currentTimeMillis()); 
+			if(opt.isPresent()) {
+				if(StringUtils.isEmpty(entity.getAvatar())) {
+					entity.setAvatar(opt.get().getAvatar());
+				}else {
+					entity.setAvatar(entity.getAvatar());
+				}
+				entity.setCreateAt(opt.get().getCreateAt());
+				entity.setUpdateAt(date);
+			}
+		}
+		else {
+			Date date = new Date(System.currentTimeMillis()); 
+			entity.setCreateAt(date);
+		}
+		
 		return storeRepo.save(entity);
 	}
 
@@ -54,6 +76,21 @@ public class StoreServiceImpl implements IStoreService{
 	@Override
 	public Store findByOwner(User owner) {
 		return storeRepo.findByOwner(owner);
+	}
+
+	@Override
+	public List<Store> findByStoreNameContaining(String name) {
+		return storeRepo.findByStoreNameContaining(name);
+	}
+
+	@Override
+	public Page<Store> findByStoreNameContaining(String name, Pageable pageable) {
+		return storeRepo.findByStoreNameContaining(name, pageable);
+	}
+
+	@Override
+	public Page<Store> findAll(Pageable pageable) {
+		return storeRepo.findAll(pageable);
 	}
 	
 	

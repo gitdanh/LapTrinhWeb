@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import vn.book.Entity.Order;
 import vn.book.Entity.OrderItem;
+import vn.book.Model.StoreRevenueReport;
 
 public interface IOrderItemService {
 
@@ -20,5 +21,9 @@ public interface IOrderItemService {
 	List<OrderItem> findByOrderIn(Collection<Order> orders);
 
 	List<OrderItem> findByOrder(Order order);
+
+	List<StoreRevenueReport> storeRevenueReport(Long storeId, String fromday, String today);
+
+	List<OrderItem> findAllByOrder(Optional<Order> order);
 
 }

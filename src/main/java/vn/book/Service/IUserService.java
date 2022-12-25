@@ -30,5 +30,11 @@ public interface IUserService {
 	User findByEmail(String email);
 
 	Optional<User> findById(Long id);
+
+	long count();
+
+	Page<User> findByUsernameContaining(String name, Pageable pageable);
+
+	List<User> findByUsernameContaining(String name);
 	
 }

@@ -27,21 +27,25 @@ public class BookServiceImpl implements IBookService {
 
 	@Override
 	public <S extends Book> S save(S entity) {
-		if (entity.getBookId() != null) {
+		if(entity.getBookId() != null) {
 			Optional<Book> opt = findById(entity.getBookId());
-			Date date = new Date(System.currentTimeMillis());
-			if (opt.isPresent()) {
-				if (StringUtils.isEmpty(entity.getImage())) {
+			Date date = new Date(System.currentTimeMillis()); 
+			if(opt.isPresent()) {
+				if(StringUtils.isEmpty(entity.getImage())) {
 					entity.setImage(opt.get().getImage());
-				} else {
+				}else {
 					entity.setImage(entity.getImage());
 				}
+				entity.setSold(opt.get().getSold());
+				entity.setPromotionalPrice(opt.get().getPromotionalPrice());
+				entity.setRating(opt.get().getRating());
 				entity.setCreateAt(opt.get().getCreateAt());
 				entity.setUpdateAt(date);
 			}
+		} else {
+			Date date = new Date(System.currentTimeMillis()); 
+			entity.setCreateAt(date);
 		}
-		Date date = new Date(System.currentTimeMillis());
-		entity.setCreateAt(date);
 		return bookRepo.save(entity);
 	}
 
@@ -105,4 +109,27 @@ public class BookServiceImpl implements IBookService {
 		return bookRepo.findByStoreAndSellingFalse(store);
 	}
 
+	@Override
+	public List<Book> findByBookNameContaining(String name) {
+		return bookRepo.findByBookNameContaining(name);
+	}
+
+	@Override
+	public Page<Book> findByBookNameContaining(String name, Pageable pageable) {
+		return bookRepo.findByBookNameContaining(name, pageable);
+	}
+
+	@Override
+	public Page<Book> findAllByStoreAndCategoryDeleteFalse(Optional<Store> store, Pageable pageable) {
+		return bookRepo.findAllByStoreAndCategoryDeleteFalse(store, pageable);
+	}
+
+	@Override
+	public Page<Book> findAllByStoreAndBookNameContainingAndCategoryDeleteFalse(Optional<Store> store, String name,
+			Pageable pageable) {
+		return bookRepo.findAllByStoreAndBookNameContainingAndCategoryDeleteFalse(store, name, pageable);
+	}
+
+	
+	
 }
