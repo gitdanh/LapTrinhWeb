@@ -488,9 +488,14 @@ public class StoreAdminController {
 	@GetMapping("delete/{storeId}")
 	public ModelAndView delete(ModelMap model, @PathVariable("storeId") Long storeId)
 	{
-		storeService.deleteById(storeId);
-		model.addAttribute("message","Xoá thành công");
-		return new ModelAndView("forward:/admin/stores",model);
+		try {
+			storeService.deleteById(storeId);
+			model.addAttribute("message","Xoá thành công");
+			return new ModelAndView("forward:/admin/stores",model);
+		} catch (StackOverflowError e) {
+			model.addAttribute("message","Xóa không thành công");
+			return new ModelAndView("forward:/admin/stores",model);
+		}
 	}
 
 	
