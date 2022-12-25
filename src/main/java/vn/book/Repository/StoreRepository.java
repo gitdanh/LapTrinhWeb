@@ -21,4 +21,7 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 	List<Store> findBystoreNameContaining(String name);
 	Page<Store> findBystoreNameContaining(String name,Pageable p);
 
+	List<Store> findByStoreNameContaining(String name);
+	Page<Store> findByStoreNameContaining(String name, Pageable pageable);
+
 }

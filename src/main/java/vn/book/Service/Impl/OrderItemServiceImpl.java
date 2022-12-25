@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import vn.book.Entity.Order;
 import vn.book.Entity.OrderItem;
+import vn.book.Model.StoreRevenueReport;
 import vn.book.Repository.OrderItemRepository;
 import vn.book.Service.IOrderItemService;
 
@@ -49,6 +50,16 @@ public class OrderItemServiceImpl implements IOrderItemService {
 	@Override
 	public List<OrderItem> findByOrder(Order order) {
 		return orderItemRepo.findByOrder(order);
+	}
+
+	@Override
+	public List<StoreRevenueReport> storeRevenueReport(Long storeId, String fromday, String today) {
+		return orderItemRepo.storeRevenueReport(storeId, fromday, today);
+	}
+
+	@Override
+	public List<OrderItem> findAllByOrder(Optional<Order> order) {
+		return orderItemRepo.findAllByOrder(order);
 	}
 	
 	

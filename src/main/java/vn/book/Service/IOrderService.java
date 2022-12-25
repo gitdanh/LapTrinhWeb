@@ -33,4 +33,8 @@ public interface IOrderService {
 	Page<Order> findAll(Pageable pageable);
 	//SessionCreateParams.LineItem.PriceData createPriceData
 
+	Page<Order> findAllByStoreAndUserUsernameContaining(Optional<Store> store, String name, Pageable pageable);
+
+	Page<Order> findAllByStore(Optional<Store> store, Pageable pageable);
+
 }
