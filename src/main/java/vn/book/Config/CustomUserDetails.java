@@ -9,16 +9,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import vn.book.Entity.User;
+import vn.book.Repository.UserRepository;
 
 @AllArgsConstructor
 public class CustomUserDetails implements UserDetails{
 
 	private User user;
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Collections.singleton(new SimpleGrantedAuthority(user.getRole()));
 	}
+	
+	
 
 	@Override
 	public String getPassword() {
@@ -53,5 +55,7 @@ public class CustomUserDetails implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+
 
 }

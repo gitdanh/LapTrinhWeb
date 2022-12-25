@@ -5,16 +5,26 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import vn.book.Entity.Store;
-import vn.book.Entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import vn.book.Entity.Book;
 import vn.book.Repository.StoreRepository;
 import vn.book.Service.IStoreService;
+
+import vn.book.Entity.Store;
+import vn.book.Entity.User;
 
 @Service
 public class StoreServiceImpl implements IStoreService{
@@ -23,7 +33,7 @@ public class StoreServiceImpl implements IStoreService{
 
 	public StoreServiceImpl(StoreRepository storeRepo) {
 		this.storeRepo = storeRepo;
-	}
+	}//
 
 	@Override
 	public <S extends Store> S save(S entity) {
@@ -46,32 +56,32 @@ public class StoreServiceImpl implements IStoreService{
 		}
 		
 		return storeRepo.save(entity);
-	}
+	}//
 
 	@Override
 	public List<Store> findAll() {
 		return storeRepo.findAll();
-	}
+	}//
 
 	@Override
 	public Optional<Store> findById(Long id) {
 		return storeRepo.findById(id);
-	}
+	}//
 
 	@Override
 	public <S extends Store> boolean exists(Example<S> example) {
 		return storeRepo.exists(example);
-	}
+	}//
 
 	@Override
 	public long count() {
 		return storeRepo.count();
-	}
+	}//
 
 	@Override
 	public void deleteById(Long id) {
 		storeRepo.deleteById(id);
-	}
+	}//
 
 	@Override
 	public Store findByOwner(User owner) {
@@ -94,4 +104,56 @@ public class StoreServiceImpl implements IStoreService{
 	}
 	
 	
+
+	@Override
+	public void delete(Store entity) {
+		// TODO Auto-generated method stub
+		storeRepo.delete(entity);
+	}
+
+
+	@Override
+	public boolean existsById(Long id) {
+		// TODO Auto-generated method stub
+		return storeRepo.existsById(id);
+	}
+	
+	@Transactional
+    public void addClient(Store store1){
+        storeRepo.saveAndFlush(store1);
+    }
+
+
+	@Override
+	public List<Store> findAllById(Iterable<Long> ids) {
+		// TODO Auto-generated method stub
+		return storeRepo.findAllById(ids);
+	}
+
+	@Override
+	public List<Store> findAll(Sort sort) {
+		// TODO Auto-generated method stub
+		return storeRepo.findAll(sort);
+	}
+
+	@Override
+	public Page<Store> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return storeRepo.findAll(pageable);
+	}
+
+
+
+	@Override
+	public List<Store> findBystoreNameContaining(String name) {
+		// TODO Auto-generated method stub
+		return storeRepo.findBystoreNameContaining(name);
+	}
+
+	@Override
+	public Page<Store> findBystoreNameContaining(String name, Pageable p) {
+		// TODO Auto-generated method stub
+		return storeRepo.findBystoreNameContaining(name, p);
+	}
+
 }

@@ -1,17 +1,24 @@
 package vn.book.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+
+import javax.security.auth.login.AccountNotFoundException;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 
 import vn.book.Entity.User;
+
 
 public interface IUserService {
 
 	void deleteAll(Iterable<? extends User> entities);
+	
+	User getCurrentlyLoggedInUser(Principal principal);
 
 	void deleteAllById(Iterable<? extends Long> ids);
 
@@ -36,5 +43,13 @@ public interface IUserService {
 	Page<User> findByUsernameContaining(String name, Pageable pageable);
 
 	List<User> findByUsernameContaining(String name);
+	
+	void updateResetPasswordToken(String token, String email) throws CustomerNotFoundException ;
+	
+	User getByResetPasswordToken(String token);
+	
+	void updatePassword(User customer, String newPassword);
+	
+	//User updateUser(User user);
 	
 }

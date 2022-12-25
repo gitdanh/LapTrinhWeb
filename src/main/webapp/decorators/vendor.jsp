@@ -22,11 +22,12 @@
 	<div>
 		<sitemesh:write property='body'></sitemesh:write>
 	</div>
-	<%-- <div>
-	<%@ include file="/common/vendor/footer.jsp"%>
-	</div> --%>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+	<div>
+	<%-- <%@ include file="/common/vendor/footer.jsp"%> --%>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 	<script type="text/javascript">
 		function chooseFile(fileInput) {
 			if (fileInput.files && fileInput.files[0]) {

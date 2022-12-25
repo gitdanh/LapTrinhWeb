@@ -12,12 +12,12 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="/home/storeListByPage"> <i
+			<li class="nav-item active"><a class="nav-link" href="#"> <i
 					class="fa fa-home"></i> Home <span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="/home/listByPage"> <i
+			<li class="nav-item"><a class="nav-link" href="#"> <i
 					class="fa fa-envelope-o"> <span class="badge badge-danger">11</span>
-				</i> qwioeuqwio
+				</i> Your Store
 			</a></li>
 			<li class="nav-item"><a class="nav-link " href="#"> <i
 					class="fa fa-envelope-o"> <span class="badge badge-warning">11</span>

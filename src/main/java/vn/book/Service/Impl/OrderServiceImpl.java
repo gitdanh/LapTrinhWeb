@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import vn.book.Entity.Order;
 import vn.book.Entity.Store;
+import vn.book.Entity.User;
 import vn.book.Repository.OrderRepository;
 import vn.book.Service.IOrderService;
 
@@ -79,6 +80,16 @@ public class OrderServiceImpl implements IOrderService{
 	}
 
 	@Override
+
+	public Page<Order> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return orderRepo.findAll(pageable);
+	}
+
+	@Override
+	public Page<Order> findAllByUser(User user, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return orderRepo.findAllByuser(user, pageable);
 	public Page<Order> findAllByStore(Optional<Store> store, Pageable pageable) {
 		return orderRepo.findAllByStore(store, pageable);
 	}
@@ -86,6 +97,7 @@ public class OrderServiceImpl implements IOrderService{
 	@Override
 	public Page<Order> findAllByStoreAndUserUsernameContaining(Optional<Store> store, String name, Pageable pageable) {
 		return orderRepo.findAllByStoreAndUserUsernameContaining(store, name, pageable);
+
 	}
 	
 	

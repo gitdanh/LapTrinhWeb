@@ -37,4 +37,7 @@ public class CartItem {
 	private Date createAt;
 	@Column(name = "updateAt", columnDefinition = "date")
 	private Date updateAt;
+//	@Column(name = "user")
+//	private User user;
+	
 }

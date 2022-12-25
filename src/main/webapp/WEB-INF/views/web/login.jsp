@@ -28,6 +28,8 @@
 		</div>
 
 		<button type="submit" class="btn btn-primary">Đăng nhập</button>
+		
 	</form>
+	<a th:href="/@{/forgot_password}">Forgot your password?</a>
 </body>
 </html>

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import vn.book.Entity.Book;
 import vn.book.Entity.Store;
@@ -21,6 +22,7 @@ public interface IBookService {
 	boolean existsById(Long id);
 
 	Optional<Book> findById(Long id);
+	
 
 	List<Book> findAllById(Iterable<Long> ids);
 
@@ -38,6 +40,10 @@ public interface IBookService {
 
 	List<Book> findByStoreAndSellingTrue(Store store);
 
+
+	List<Book> findBybookNameContaining(String name);
+	Page<Book> findBybookNameContaining(String name,Pageable p);
+
 	Page<Book> findByBookNameContaining(String name, Pageable pageable);
 
 	List<Book> findByBookNameContaining(String name);
@@ -45,5 +51,6 @@ public interface IBookService {
 	Page<Book> findAllByStoreAndBookNameContainingAndCategoryDeleteFalse(Optional<Store> store, String name, Pageable pageable);
 
 	Page<Book> findAllByStoreAndCategoryDeleteFalse(Optional<Store> store, Pageable pageable);
+
 
 }

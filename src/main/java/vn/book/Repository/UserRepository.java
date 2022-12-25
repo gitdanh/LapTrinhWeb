@@ -14,6 +14,8 @@ import vn.book.Entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	User findByUsername(String username);
 	User findByEmail(String email);
+	public User findByResetPasswordToken(String token);
+	//public User updatUser(User user);
 	List<User> findByUsernameContaining(String name);
 	Page<User> findByUsernameContaining(String name, Pageable pageable);
 }	
