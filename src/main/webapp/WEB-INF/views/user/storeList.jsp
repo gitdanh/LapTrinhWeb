@@ -8,10 +8,6 @@
 				<!-- BEGIN EXAMPLE TABLE PORTLET-->
 				<div class="portlet box grey-cascade">
 					<div class="portlet-title">
-						<div
-							class="caption d-flex justify-content-center align-items-center">
-							<i class="fa fa-globe"><a href="/vendor/dashboard">Quản lý Store</a></i>
-						</div>
 						<div class="tools">
 							<a href="javascript:;" class="collapse"> </a> <a
 								href="#portlet-config" data-toggle="modal" class="config"> </a>
@@ -26,7 +22,7 @@
 							<!-- Kết thúc hiển thị thông báo -->
 							<div class="row mt-2 mb-2">
 								<div class="col-md-6">
-									<form action="/home/storeListByPage">
+									<form action="/user/storeListByPage">
 										<div class="input-group">
 											<input type="text" class="form-control ml-2" name="name"
 												id="name" placeholder="Nhập để tìm kiếm">
@@ -42,7 +38,7 @@
 									</div>
 								</c:if>
 								<c:if test="${storePage.hasContent()}">
-									<table class="table table-striped table-responsive">
+									<table class="table ">
 										<thead class="thear-inverse">
 											<tr>
 												<th>Store Name</th>
@@ -66,7 +62,7 @@
 									</table>
 								</c:if>
 								<div class="row">
-									<form action="/home/listByPage">
+									<form action="/user/storeListByPage">
 										<div class="mb-3 input-group float-left">
 											<label for="size" class="mr-2">Page size:</label> <select
 												class="form-select ml-2" name="size" aria-label="size"
@@ -86,7 +82,7 @@
 											<li
 												class="${1==storePage.number +1 ? 'page-team active':'page-item' }">
 												<a class="page-link"
-												href="<c:url value='/home/storeListByPage?name=${storeName}&size=${storePage.size}&page=${1}'/>"
+												href="<c:url value='/user/storeListByPage?name=${storeName}&size=${storePage.size}&page=${1}'/>"
 												tabindex="-1" aria-disabled="true">First</a>
 											</li>
 											<c:forEach items="${pageNumbers}" var="pageNumber">
@@ -94,13 +90,13 @@
 													<li
 														class="${pageNumber == storePage.number +1 ? 'page-item active':'page-item'}"><a
 														class="page-link"
-														href="<c:url value='/home/storeListByPage?name=${storeName}&size=${storePage.size}&page=${pageNumber}'/>">${pageNumber}</a></li>
+														href="<c:url value='/user/storeListByPage?name=${storeName}&size=${storePage.size}&page=${pageNumber}'/>">${pageNumber}</a></li>
 												</c:if>
 											</c:forEach>
 											<li
 												class="${storePage.totalPages == storePage.number + 1 ? 'page-item active':'page-item'}">
 												<a
-												href="<c:url value='/home/storeListByPage?name=${storeName}&size=${storePage.size}&page=${storePage.totalPages}'/>"
+												href="<c:url value='/user/storeListByPage?name=${storeName}&size=${storePage.size}&page=${storePage.totalPages}'/>"
 												class="page-link">Last</a>
 											</li>
 										</ul>

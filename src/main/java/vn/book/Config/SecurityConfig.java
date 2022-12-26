@@ -53,12 +53,12 @@ public class SecurityConfig {
 			.permitAll().anyRequest().authenticated();
 		
 		http.csrf().disable().cors().disable()
-			.formLogin().failureUrl("/login?error").defaultSuccessUrl("/user", true)
+			.formLogin().failureUrl("/login?error")
 			//.defaultSuccessUrl("/home")
 			.loginPage("/login").permitAll()
 			.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/login").deleteCookies("remember-me").permitAll()
+			.logoutSuccessUrl("/").deleteCookies("remember-me").permitAll()
 			.and()
 			.rememberMe();
 		

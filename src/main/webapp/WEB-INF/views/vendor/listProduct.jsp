@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp" %>
 <div>
-	<a href="/vendor/product/onsale">Đang mở bán</a>
+	<a href="/vendor/product/onsale" class="btn btn-primary">Đang mở bán</a>
 	&nbsp;
-	<a href="/vendor/product/instorage">Đang lưu trữ</a>
+	<a href="/vendor/product/instorage" class="btn btn-secondary">Đang lưu trữ</a>
 </div>
 <c:choose>
 <c:when test="${onSale==true}">
@@ -15,7 +15,7 @@
 </c:otherwise>
 </c:choose> 
 <div>
-	<a href="add">Thêm sản phẩm</a>
+	<a href="add" class="btn btn-danger">Thêm sản phẩm</a>
 </div>
 <c:if test="${message != null}">
 	<div class="alert alert-primary" role="alert">
@@ -23,16 +23,16 @@
 	</div>
 </c:if>
 
-<table>
+<table class="table">
 	<thead>
 		<tr>
 			<th>Ảnh</th>
-			<th>|Tên Sách</th>
-			<th>|Giá</th>
-			<th>|Số Lượng</th>
-			<th>|Tác Giả</th>
-			<th>|Thể Loại</th>
-			<th>|Hành Động</th>
+			<th>Tên Sách</th>
+			<th>Giá</th>
+			<th>Số Lượng</th>
+			<th>Tác Giả</th>
+			<th>Thể Loại</th>
+			<th>Hành Động</th>
 		</tr>
 	</thead>
 	<tbody>

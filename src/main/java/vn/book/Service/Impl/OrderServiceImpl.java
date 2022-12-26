@@ -90,6 +90,7 @@ public class OrderServiceImpl implements IOrderService{
 	public Page<Order> findAllByUser(User user, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return orderRepo.findAllByuser(user, pageable);
+	}
 	public Page<Order> findAllByStore(Optional<Store> store, Pageable pageable) {
 		return orderRepo.findAllByStore(store, pageable);
 	}

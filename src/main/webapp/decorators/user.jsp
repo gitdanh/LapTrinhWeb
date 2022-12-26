@@ -20,7 +20,7 @@
 
 	<%@ include file="/common/user/header.jsp"%>
 	<sitemesh:write property='body'></sitemesh:write>
-	<%@ include file="/common/user/footer.jsp"%>
+	<%@ include file="/common/web/footer.jsp"%>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".minusButton").on("click", function(event) {
@@ -33,12 +33,13 @@
 			});
 			updateTotal();
 		});
-		
+
 		function getById(param) {
-			let quantity=document.getElementById("quan").value;
-			document.getElementById("add").href='/user/add/'+ param + '/' + quantity;
+			let quantity = document.getElementById("quan").value;
+			document.getElementById("add").href = '/user/add/' + param + '/'
+					+ quantity;
 		}
-		
+
 		function decreaseQuantity(link) {
 			id = link.attr("pid");
 			qtyInput = $("#quantity" + id);

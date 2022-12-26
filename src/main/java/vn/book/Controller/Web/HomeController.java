@@ -37,7 +37,7 @@ import java.util.stream.IntStream;
 
 
 @Controller
-@RequestMapping("home")
+@RequestMapping("")
 public class HomeController {
 	@Autowired
 	IBookService bookService;

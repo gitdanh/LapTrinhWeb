@@ -10,7 +10,7 @@
 					<div class="portlet-title">
 						<div
 							class="caption d-flex justify-content-center align-items-center">
-							<i class="fa fa-globe"></i>Quản lý Category
+							<i class="fa fa-globe"></i>Sản phẩm
 						</div>
 						<div class="tools">
 							<a href="javascript:;" class="collapse"> </a> <a
@@ -43,7 +43,7 @@
 								</c:if>
 								<c:if test="${bookPage.hasContent()}">
 									<table class="table table-striped table-responsive">
-										<thead class="thear-inverse">
+										<!-- <thead class="thear-inverse">
 											<tr>
 												<th>Book Name</th>
 												<th>Author</th>
@@ -52,37 +52,78 @@
 												<th>Sale</th>
 												<th>Rating</th>
 											</tr>
-										</thead>
+										</thead> -->
 										<tbody>
 											<c:forEach items="${bookPage.content}" var="book">
-												<tr>
+												<div class="card card-body mt-3">
+													<div
+														class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+														<div class="mr-2 mb-3 mb-lg-0">
+
+															<img src="https://i.imgur.com/Aj0L4Wa.jpg" width="150"
+																height="150" alt="">
+
+														</div>
+
+														<div class="media-body">
+															<h6 class="media-title font-weight-semibold">
+																<a href="#" data-abc="true">${book.bookName}</a>
+															</h6>
+
+															<ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
+																<li class="list-inline-item"><a href="#"
+																	class="text-muted" data-abc="true">Author:
+																		${book.author}</a></li>
+																<li class="list-inline-item"><a href="#"
+																	class="text-muted" data-abc="true">Sold:
+																		${book.sold}</a></li>
+															</ul>
+
+															<p class="mb-3">Lorem ipsum dolor sit amet,
+																consectetur adipiscing elit, sed do eiusmod tempor
+																incididunt ut labore et dolore magna aliqua.</p>
+
+															<input type="number" id="quan" class="mb-3">
+														</div>
+
+														<div class="mt-3 mt-lg-0 ml-lg-3 text-center">
+															<h3 class="mb-0 font-weight-semibold">${book.promotionalPrice}</h3>
+
+															<div>
+																<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+																	class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+																	class="fa fa-star"></i>
+
+															</div>
+
+															<div class="text-muted">Rate: ${book.rating}</div>
+															
+															
+															<a href="" id="add"
+														onclick="getById(${book.bookId})" class="btn btn-warning col-6">Add</a>&nbsp;
+															
+															<!-- <button type="button"
+																class="btn btn-warning mt-4 text-white">
+																<i class="icon-cart-add mr-2"></i> Add to cart
+															</button> -->
+														</div>
+													</div>
+												</div>
+												<%-- <tr>
 													<td>${book.bookName}</td>
 													<td>${book.author}</td>
 													<td>${book.sold}</td>
 													<td>${book.price}</td>
 													<td>${book.promotionalPrice}</td>
 													<td>${book.rating}</td>
-													<td>
-													<input type="number" id="quan">
-														<%-- <ul class="pagination">
-															<li class="page-item"><a
-																class="page-link minusButton" href="" th:pid="${id}"><b>-</b></a></li>
-															<li class="page-item">
-															<input type="text"
-																class="form-control text-center"
-																onkeydown="return false" style="width: 55px;" id="quan" />
-															</li>
-															<li class="page-item"><a
-																class="page-link plusButton" href="" th:pid="${id}"><b>+</b></a></li>
-														</ul> --%>
+													<td><input type="number" id="quan" class="col-6">
 													</td>
+
+													<td><a href="" id="add"
+														onclick="getById(${book.bookId})" class="col-6">Add</a>&nbsp;
+
 													
-													<td><a <%-- href="/user/add/${book.bookId}/quan" --%> href="" id="add" onclick="getById(${book.bookId})">Add</a>&nbsp;													
-														<%-- <a href="/vendor/product/delete/${book.bookId}" data-id="${book.bookId}"
-					data-name="${book.bookName}">Xóa</a></td> --%> <%-- <form:button action="/addToCart" method="POST">
-														<input type"number" name="quantity" class="form-control">
-													</form:button> --%>
-												</tr>
+												</tr> --%>
 
 											</c:forEach>
 

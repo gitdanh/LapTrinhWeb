@@ -98,10 +98,6 @@ public class StoreServiceImpl implements IStoreService{
 		return storeRepo.findByStoreNameContaining(name, pageable);
 	}
 
-	@Override
-	public Page<Store> findAll(Pageable pageable) {
-		return storeRepo.findAll(pageable);
-	}
 	
 	
 

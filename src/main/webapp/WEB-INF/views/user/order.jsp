@@ -41,18 +41,25 @@
 									</div>
 								</c:if>
 								<c:if test="${orderPage.hasContent()}">
-									<table class="table table-striped table-responsive">
+									<table class="table">
 										<thead class="thear-inverse">
+
+											<tr>
+												<th>ID</th>
+												<th>Store</th>
+												<th>Ngày</th>
+												<th>Số lượng</th>
+												<th>Trạng thái</th>
+											</tr>
 										</thead>
 										<tbody>
 											<c:forEach items="${orderPage.content}" var="order">
 												<tr>
 													<td>${order.orderId}</td>
-													<td>${order.store.storeId}</td>
-													<%-- <td>${order.}</td>
-													<td>${order.}</td>
-													<td>${order.}</td>
-													<td>${order.}</td> --%>
+													<td>${order.store.storeName}</td>
+													<td>${order.createAt}</td>
+													<td>${order.amountFromUser}</td>
+													<td>${order.status}</td>
 													<%-- <form:button action="/addToCart" method="POST">
 														<input type"number" name="quantity" class="form-control">
 													</form:button> --%>
@@ -67,8 +74,8 @@
 								<div class="row">
 									<form action="/user/orderList">
 										<div class="mb-3 input-group float-left">
-											<label for="size" class="mr-2">Page size:</label> 
-											<select	class="form-select ml-2" name="size" aria-label="size"
+											<label for="size" class="mr-2">Page size:</label> <select
+												class="form-select ml-2" name="size" aria-label="size"
 												id="size" onchange="this.form.submit()">
 												<option ${orderPage.size==1 ? 'selected':''} value="1">1</option>
 												<option ${orderPage.size==3 ? 'selected':''} value="3">3</option>
