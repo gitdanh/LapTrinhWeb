@@ -22,32 +22,18 @@
 				</div>
 				<div>
 					<%-- <input type="number" value="${item.count}"> --%>
-					<ul class="pagination">
-						<li class="page-item"><a class="page-link minusButton"
-							href="" th:pid="${id}"><b>-</b></a></li>
-						<li class="page-item"><input type="text" th:value="${item.count}"
-							class="form-control text-center" onkeydown="return false"
-							style="width: 55px" th:id="'quantity' + ${id}" /></li>
-						<li class="page-item"><a class="page-link plusButton" href=""
-							th:pid="${id}"><b>+</b></a></li>
-					</ul>
+					<p>${item.count}</p>
 				</div>
 				<div>
-					<span> X</span> <span>${item.book.promotionalPrice}</span> <span>=[Total]</span>
+					<span> X</span> <span>${item.book.promotionalPrice}</span>
 				</div>
-				<div>
+				<div></div>
 			</div>
 			<div class="row m-1">&nbsp;</div>
 		</c:forEach>
 		<div class="col"></div>
 	</div>
 	<div class="col-sm-4">
-		<div>
-			<span class="h3"> Total: </span>
-		</div>
-		<div class="mt-2">
-			<span class="h2"> [Total] </span>
-		</div>
 		<div class="mt-2">
 			<a href="/cart/checkout">
 				<button class="btn btn-danger p-3 mt-2 ">Check out</button>
@@ -55,8 +41,9 @@
 		</div>
 	</div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script >$(document).ready(function() {
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>$(document).ready(function() {
     $(".minusButton").on("click", function(event) {
         event.preventDefault();
         decreaseQuantity($(this));

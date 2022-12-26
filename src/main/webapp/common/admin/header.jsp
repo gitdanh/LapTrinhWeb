@@ -5,7 +5,7 @@
 <!-- logo header -->
 <div class="nav-header">
 	<a href="/admin/home" class="brand-logo"> <img class="logo-abbr"
-		src="/templates/images/boker-logo.png" alt=""> 
+		src="/templates/images/boker-logo.png" alt="">
 	</a>
 
 	<div class="nav-control">
@@ -21,12 +21,15 @@
 		<nav class="navbar navbar-expand">
 			<div class="collapse navbar-collapse justify-content-between">
 				<div class="header-left">
+					<div>img</div>
 					<div class="search_bar dropdown">
 						<form action="/admin/categories/searchpagenated">
-							<button class="btn btn-outline primary ml-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+							<button class="btn btn-outline primary ml-2">
+								<i class="fa-solid fa-magnifying-glass"></i>
+							</button>
 							<div class="dropdown-menu p-0 m-0">
-									<input class="form-control" type="search" placeholder="Search"
-										aria-label="Search">
+								<input class="form-control" type="search" placeholder="Search"
+									aria-label="Search">
 							</div>
 						</form>
 					</div>
@@ -98,8 +101,8 @@
 							<i class="mdi mdi-account"></i>
 					</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="/admin/profile" class="dropdown-item"> <i class="icon-user"></i>
-								<span class="ml-2">Profile </span>
+							<a href="/admin/profile" class="dropdown-item"> <i
+								class="icon-user"></i> <span class="ml-2">Profile </span>
 							</a> <a href="#" class="dropdown-item"> <i
 								class="icon-envelope-open"></i> <span class="ml-2">Inbox
 							</span>
